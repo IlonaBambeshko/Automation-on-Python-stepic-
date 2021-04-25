@@ -22,3 +22,10 @@ class ProductPage(BasePage):
     def alert_should_contain_price(self, price):
         text_from_page = self.browser.find_element(*ProductPageLocators.ALERT_AFTER_ADDING_ABOUT_PRICE).text
         assert price == text_from_page, f"Alert doesn't contain '{price}'"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+               "Success message is presented, but should not be"
+    def message_disappeared_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+               "Success message is presented, but should disappeared"
